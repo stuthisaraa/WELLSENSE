@@ -1,0 +1,538 @@
+/* ---------------- CSS Variables ---------------- */
+:root {
+    --cream: #FFFDD0;
+    --lightBlue: #ADD8E6;
+    --darkerBlue: #90c0d0;
+    --mustard: #FFDB58;
+    --sage: #9DC183;
+    --beige: #F5F5DC;
+    --fontPrimary: 'Arial, sans-serif';
+    --gradient-end: #FFE8A6; /* Secondary color for gradient in header */
+  }
+  
+  /* ---------------- Global Styles ---------------- */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: var(--fontPrimary);
+  }
+  
+  /* ---------------- Dashboard Styles ---------------- */
+  .dashboard-container {
+    position: relative; /* so that the background slideshow is relative to this container */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header - Enhanced Styling with Gradient, Shadow, and Border */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--cream), var(--gradient-end));
+    color: black;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #ddd;
+  }
+  header h2 {
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 1.8em;
+    letter-spacing: 1px;
+  }
+  .dashboard-logo {
+    width: 50px;
+    transition: transform 0.3s ease;
+  }
+  .dashboard-logo:hover {
+    transform: scale(1.05);
+  }
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* spacing between header items */
+  }
+  
+  /* Ensure icons in header have a smooth transition */
+  header svg {
+    color: black; /* Hamburger menus appear black */
+    transition: transform 0.2s ease;
+  }
+  header svg:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    margin: 0 10px;
+  }
+  select {
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .dropdown-label-box {
+    padding: 8px 16px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: var(--fontPrimary);
+    margin-left: 5px;
+    color: black;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+  }
+  .dropdown-label-box:hover {
+    background-color: #d5d5d5;
+  }
+  
+  /* Enhanced Dropdown Menu (for your Dropdown component) */
+  .dropdown-menu {
+    position: absolute;
+    top: 35px; /* adjust as needed */
+    right: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+    padding: 10px 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+  }
+  .dropdown-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .dropdown-menu li {
+    list-style: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .dropdown-menu li:hover {
+    background-color: #d5d5d5;
+    transform: scale(1.02);
+  }
+  
+  /* Alerts */
+  .bell-icon {
+    position: relative;
+    cursor: pointer;
+    color: #ffcc00;
+  }
+  
+  .bell-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+  }
+  
+  /* Modal Styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .alert-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .alert-item.unread {
+    background-color: #fffae6;
+  }
+  
+  .alert-item.acknowledged {
+    background-color: #e6ffe6;
+  }
+  
+  .acknowledged-text {
+    font-size: 12px;
+    color: green;
+  }
+  
+  .acknowledge-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .acknowledge-buttons button:nth-child(1) {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .acknowledge-buttons button:nth-child(2) {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .close-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
+  /* General Button Styling */
+  button {
+    background: green;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Logout Button - Updated */
+  .logout-button {
+    padding: 8px 16px;
+    background-color: var(--lightBlue);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .logout-button:hover {
+    background-color: var(--darkerBlue);
+  }
+  
+  /* Content Container in Dashboard */
+  .content-container {
+    padding: 20px;
+    text-align: center;
+  }
+  .view-patients-button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .view-patients-button:hover {
+    background-color: darkblue;
+  }
+  
+  /* ---------------- Background Slideshow ---------------- */
+  /* Using fixed positioning for a subtle parallax effect */
+  .background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .background-slideshow .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    animation: slideAnimation 18s infinite;
+  }
+  .background-slideshow .slide:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .background-slideshow .slide:nth-child(2) {
+    animation-delay: 6s;
+  }
+  .background-slideshow .slide:nth-child(3) {
+    animation-delay: 12s;
+  }
+  @keyframes slideAnimation {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    33% { opacity: 1; }
+    38% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  
+  /* ---------------- Patient List & Patient Card Styles ---------------- */
+  .patient-list {
+    padding: 20px;
+    text-align: center;
+  }
+  .patients-container {
+    background: var(--beige);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .patient-card {
+    background: var(--sage);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 200px;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .patient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  .patient-card h3 {
+    margin-bottom: 10px;
+  }
+  .patient-card p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  .patient-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    margin: 10px;
+  }
+  
+  .pulse-chart-container {
+    width: 100%;
+    height: 150px;
+    margin-top: 15px;
+  }
+  
+  .pulse-chart {
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+  /* ---------------- Login Page Styles ---------------- */
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--beige);
+  }
+  .logo-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .logo-title-container h2 {
+    margin-left: 10px; /* Small space between logo and Wellsense text */
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+  .title {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 200px;
+  }
+  .login-box input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .login-box button:hover {
+    background-color: darkblue;
+  }
+  
+  /* ---------------- New Outer Box for Login ---------------- */
+  .outer-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 250px;
+  }
+  
+  /* ---------------- Patient Page Styles ---------------- */
+  .patient-page-container {
+    padding: 20px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+  }
+  .patient-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .back-button {
+    padding: 8px 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  .back-button:hover {
+    background-color: darkred;
+  }
+  
+  /* ---------------- Modal Styles ---------------- */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  /* Loading Screen Styles */
+/* Loading Screen Container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FFFDD0; /* Matches your header cream color */
+  }
+  
+  /* Spinning Logo */
+  .loading-logo {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Keyframe for Spinning Logo */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Loading Bar Container */
+  .loading-bar-container {
+    margin-top: 20px;
+    width: 200px; /* Width of loading bar container */
+    height: 10px;
+    background-color: #e0e0e0; /* Light grey background */
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  /* Loading Bar Progress */
+  .loading-bar {
+    height: 100%;
+    background-color: #007bff; /* Blue loading bar */
+    width: 0;
+    animation: load 3s ease-in-out forwards;
+  }
+  
+  /* Keyframe for Loading Bar */
+  @keyframes load {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  /* Tagline Text */
+  /* Tagline Text */
+.tagline {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: black; /* Changed text color to black */
+    text-align: center;
+    font-weight: bold;
+    font-style: italic; /* Optional: Adds a bit of style to the tagline */
+  }
+  
+  /* Adding Quotes to the Tagline */
+  .tagline::before {
+    content: '"'; /* Adds a quote before the tagline */
+    font-size: 1.5rem; /* Adjusts the size of the quotes */
+  }
+  
+  .tagline::after {
+    content: '"'; /* Adds a quote after the tagline */
+    font-size: 1.5rem; /* Adjusts the size of the quotes */
+  }
+  
+  
